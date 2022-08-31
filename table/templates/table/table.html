@@ -1,0 +1,45 @@
+<head>
+<style>
+table {
+        border-collaps: collapse;
+        width: 50%;
+        align: center;
+}
+th , td {
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid black;
+}
+a.btn {
+        padding: 15px 25px;
+        background-color: #157894;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+}
+a.btn:hover{
+        background-color: #156989;
+
+</style>
+</head>
+<body>
+        <table>
+                <tr>
+                        <th></th>
+                        <th>صاحب کار</th>
+                        <th>تخمین زمانی</th>
+                        <th>ارزش کار</th>
+                        <th>عنوان کار</th>
+                </tr>
+                {% for k in karlist %}
+                    <tr>
+                            <td><a class='btn' href='{{k.id}}'>توضیحات</a></td>
+                            <td>{{k.saheb}}</td>
+                            <td>{{k.zaman}}</td>
+                            <td>{{k.arzesh}}</td>
+                            <td>{{k.name}}</td>
+                    </tr>
+                {% endfor %}
+        </table>
+</body>
