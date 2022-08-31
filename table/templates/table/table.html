@@ -32,7 +32,8 @@ a.btn:hover{
                         <th>ارزش کار</th>
                         <th>عنوان کار</th>
                 </tr>
-                {% for k in karlist %}
+                {% for i in p.page(page).objects_list%}
+                    {% k = kar[i] %}
                     <tr>
                             <td><a class='btn' href='{{k.id}}'>توضیحات</a></td>
                             <td>{{k.saheb}}</td>
