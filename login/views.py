@@ -3,7 +3,7 @@ from django.http import HttpResponse as hr
 from django.contrib.auth.models import User
 from django.template import loader
 from django.shortcuts import render
-
+from django.contrib.auth import authenticate , login
 
 
 def index (req):
@@ -15,12 +15,14 @@ def index (req):
             }
             return hr(temp.render(context , req))
         else :
-            u = User()
-            u.username = req.POST['uname']
-            u.set_password(req.POST['pass'])
-            u.save()
-            req.session['uname'] = u.username
-            return hr('You are logged in . {} !'.format(u.username))
+            un = req.POST['uname']
+            pw = req.POST['pass']
+            user = authenticate(req , username = un , password = pw)
+            if user is not None :
+                login(req , user)
+                return hr("Logged in successfully. {}".format(req.user.username))
+            else :
+                return hr("Username or Password invalid")
     else :
         return hr("Wellcome back , {} !".format(req.session['uname']))
 def logout (req):
