@@ -21,4 +21,5 @@ urlpatterns = [
     path('polls/' , include('polls.urls')),
     path('table/' , include('table.urls')),
     path('login/' , include('login.urls')),
+    path('logmail/' , include('logmail.urls')),
 ]
