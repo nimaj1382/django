@@ -5,6 +5,7 @@ import random
 import string
 from django.contrib.auth.models import User
 from django.template.loader import get_template
+from .models import tkn
 
 ltrs = string.ascii_letters + string.digits
 def randstr ():
@@ -18,26 +19,29 @@ def index(req):
         u = User.objects.filter(email = req.POST['email'])
         if len(u):
             u = u[0]
-            if u.last_name == '' :
+            if not hasattr(u , 'tkn') :
                 while True:
                     s = randstr()
-                    if not len(User.objects.filter(last_name = s)):
-                        u.last_name = randstr()
-                        u.save()
+                    if not len(tkn.objects.filter(tok = s)):
+                        t = tkn(user = u , tok = randstr())
+                        t.save()
                         break
-            return hr("<a href='{}'>Login</a>".format(u.last_name))
+            return hr("<a href='{}'>Login</a>".format(u.tkn.tok))
         else :
             u = User(email = req.POST['email'])
+            u.save()
             while True:
                 s = randstr()
                 if not len(User.objects.filter(last_name=s)):
-                    u.last_name = randstr()
-                    u.save()
+                    t = tkn(user = u , tok = randstr())
+                    t.save()
                     break
-            return hr("<a href='{}'>Login</a>".format(u.last_name))
+            return hr("<a href='{}'>Login</a>".format(u.tkn.tok))
 
 def login(req , token):
-    u = User.objects.filter(last_name = token)[0]
+    u = tkn.objects.filter(last_name = token)[0].user
     if u.username == '':
         temp = get_template('logmail/form.html')
         return hr(temp.render({} , req))
+    else :
+        return hr('wellcome {}'.format(u.username))

@@ -2,7 +2,6 @@
 <style>
 table {
         border-collaps: collapse;
-        width: 50%;
         align: center;
 }
 th , td {
@@ -24,22 +23,27 @@ a.btn:hover{
 </style>
 </head>
 <body>
-        <table>
-                <tr>
-                        <th></th>
-                        <th>صاحب کار</th>
-                        <th>تخمین زمانی</th>
-                        <th>ارزش کار</th>
-                        <th>عنوان کار</th>
-                </tr>
-                {% for kar in page_object %}
-                    <tr>
-                            <td><a class='btn' href='../kar{{kar.id}}'>توضیحات</a></td>
-                            <td>{{kar.saheb}}</td>
-                            <td>{{kar.zaman}}</td>
-                            <td>{{kar.arzesh}}</td>
-                            <td>{{kar.name}}</td>
-                    </tr>
-                {% endfor %}
-        </table>
+        <div style="display:inline-block">
+                <table>
+                        <tr>
+                                <th></th>
+                                <th>صاحب کار</th>
+                                <th>تخمین زمانی</th>
+                                <th>ارزش کار</th>
+                                <th>عنوان کار</th>
+                        </tr>
+                        {% for job in page_object %}
+                            <tr>
+                                    <td><a class='btn' href='../job{{job.id}}'>توضیحات</a></td>
+                                    <td>{{job.owner}}</td>
+                                    <td>{{job.time}}</td>
+                                    <td>{{job.price}}</td>
+                                    <td>{{job.name}}</td>
+                            </tr>
+                        {% endfor %}
+                </table>
+        </div>
+        <div style="display:inline-block;align:right">
+                <a class="btn" href="../addjob" style="align:right">افزودن کار</a>
+        </div>
 </body>

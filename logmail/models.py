@@ -1,3 +1,5 @@
 from django.db import models
-
-# Create your models here.
+from django.contrib.auth.models import User
+class tkn (models.Model):
+    user = models.OneToOneField(User , models.CASCADE)
+    tok = models.CharField(max_length=200)

@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'logmail.apps.LogmailConfig',
     'table.apps.TableConfig',
     'polls.apps.PollsConfig',
     'django.contrib.admin',
